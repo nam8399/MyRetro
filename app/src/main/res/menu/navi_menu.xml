@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+
+    <item
+        android:id="@+id/homeFragment"
+        android:title="홈"
+        android:icon="@drawable/icon_home"/>
+
+    <item
+        android:id="@+id/retroshopFragment"
+        android:title="레트로샵"
+        android:icon="@drawable/icon_retroshop"/>
+
+    <item
+        android:id="@+id/placeFragment"
+        android:title="플레이스"
+        android:icon="@drawable/icon_place"/>
+    <item
+        android:id="@+id/userretroFragment"
+        android:title="유저레트로"
+        android:icon="@drawable/icon_userretro"/>
+    <item
+        android:id="@+id/myprofileFragment"
+        android:title="내 정보"
+        android:icon="@drawable/icon_myprofile"/>
+
+</menu>

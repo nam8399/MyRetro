@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.sikstree.myretro.viewModel.CityPopViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:background="@drawable/background_citypop"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/layout_music"
+            android:layout_width="match_parent"
+            android:layout_height="100dp"
+            android:layout_marginTop="30dp"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:ignore="MissingConstraints">
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:padding="5dp"
+                android:adjustViewBounds="true">
+            </ImageView>
+            <ImageView
+                android:id="@+id/btn_backmusic"
+                android:layout_width="47dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.01"
+                android:src="@drawable/icon_backmusic"
+                android:padding="10dp"
+                android:adjustViewBounds="true">
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/btn_playmusic"
+                android:layout_width="57dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="3dp"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:onClick="@{() -> viewModel.playmusic()}"
+                android:src="@drawable/icon_musicplay"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true">
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/btn_pausemusic"
+                android:layout_width="57dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:layout_marginTop="3dp"
+                android:layout_marginLeft="3dp"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:visibility="gone"
+                android:onClick="@{() -> viewModel.pausemusic()}"
+                android:src="@drawable/icon_pause"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true">
+            </ImageView>
+
+            <ImageView
+                android:id="@+id/btn_nextmusic"
+                android:layout_width="47dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.01"
+                android:padding="10dp"
+                android:src="@drawable/icon_nextmusic"
+                android:scaleType="fitCenter"
+                android:adjustViewBounds="true">
+            </ImageView>
+            <ImageView
+                android:layout_width="10dp"
+                android:layout_height="match_parent"
+                android:layout_weight="0.5"
+                android:padding="10dp"
+                android:adjustViewBounds="true">
+            </ImageView>
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_citypop_text"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
+            android:text="시티팝 꿀템"
+            android:textColor="@color/black"
+            android:fontFamily="@font/dunggeunmo"
+            android:textSize="20sp"
+            android:layout_marginTop="30dp"
+            app:layout_constraintTop_toBottomOf="@+id/layout_music">
+        </TextView>
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/item_citypop_text"
+            android:layout_marginTop="20dp">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/window_first"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:background="@drawable/icon_retrowindow"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/window_second"
+                app:layout_constraintBottom_toBottomOf="parent">
+                <ImageView
+                    android:id="@+id/img_window_first"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintHeight_percent="0.8"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:padding="10dp"
+                    android:src="@drawable/img_cp_ex1"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                </ImageView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/window_second"
+                android:layout_width="175dp"
+                android:layout_height="175dp"
+                android:background="@drawable/icon_retrowindow"
+                app:layout_constraintStart_toEndOf="@+id/window_first"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent">
+                <ImageView
+                    android:id="@+id/img_window_second"
+                    android:layout_width="match_parent"
+                    android:layout_height="0dp"
+                    app:layout_constraintHeight_percent="0.8"
+                    android:src="@drawable/img_cp_ex2"
+                    android:padding="10dp"
+                    android:layout_marginRight="5dp"
+                    android:layout_marginBottom="5dp"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent">
+                </ImageView>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="70dp"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            tools:ignore="MissingConstraints">
+            <ImageView
+                android:id="@+id/logo"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_weight="0.1"
+                android:src="@drawable/logoreal"
+                android:padding="5dp"
+                android:adjustViewBounds="true">
+            </ImageView>
+        </LinearLayout>
+
+
+
+
+
+
+
+
+
+
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
