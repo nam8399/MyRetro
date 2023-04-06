@@ -34,12 +34,26 @@ class CityPopViewModel( application: Application) : AndroidViewModel(application
         }
         mediaPlayer?.start()
         isMusicPlay.value = true
+        mediaPlayer?.setOnCompletionListener{
+            isMusicPlay.value = false
+            replaymusic()
+        }
     }
 
     fun pausemusic() {
         mediaPlayer?.pause()
         isMusicPlay.value = false
         position_music.value = mediaPlayer?.currentPosition
+    }
+
+    fun replaymusic() {
+        if (isMusicPlay.value == true) {
+            position_music.value = 0
+            position_music.value?.let { mediaPlayer?.seekTo(it) }
+            mediaPlayer?.start()
+        } else {
+            position_music.value = 0
+        }
     }
 
     fun onStop() {
