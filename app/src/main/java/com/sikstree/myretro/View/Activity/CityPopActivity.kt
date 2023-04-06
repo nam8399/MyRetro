@@ -67,11 +67,9 @@ class CityPopActivity : AppCompatActivity() {
     private fun observeViewModel() {
         viewModel.isMusicPlay.observe(this, Observer {
             if(it) {
-                Log.d(title, "버튼 플레이")
                 binding.btnPlaymusic.visibility = View.GONE
                 binding.btnPausemusic.visibility = View.VISIBLE
             } else {
-                Log.d(title, "버튼 플레이 노노")
                 binding.btnPlaymusic.visibility = View.VISIBLE
                 binding.btnPausemusic.visibility = View.GONE
             }

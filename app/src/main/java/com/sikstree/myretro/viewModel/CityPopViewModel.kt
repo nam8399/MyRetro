@@ -18,15 +18,20 @@ class CityPopViewModel( application: Application) : AndroidViewModel(application
     private var mediaPlayer: MediaPlayer? = null
 
     var isMusicPlay = MutableLiveData<Boolean>()
+    var position_music = MutableLiveData<Int>()
 
 
 
     init {
         isMusicPlay.value = false
+        position_music.value = 0
     }
 
     fun playmusic() {
         mediaPlayer = MediaPlayer.create(getApplication(), R.raw.myretro_citypop)
+        if (position_music.value != 0) {
+            position_music.value?.let { mediaPlayer?.seekTo(it) }
+        }
         mediaPlayer?.start()
         isMusicPlay.value = true
     }
@@ -34,11 +39,12 @@ class CityPopViewModel( application: Application) : AndroidViewModel(application
     fun pausemusic() {
         mediaPlayer?.pause()
         isMusicPlay.value = false
+        position_music.value = mediaPlayer?.currentPosition
     }
 
     fun onStop() {
-        mediaPlayer?.release()
-        mediaPlayer = null
+//        mediaPlayer?.release()
+//        mediaPlayer = null
     }
 
 
