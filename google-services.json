@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "125029452203",
+    "project_id": "myretro-4a2f6",
+    "storage_bucket": "myretro-4a2f6.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:125029452203:android:f441736bd054d4f678eaee",
+        "android_client_info": {
+          "package_name": "com.sikstree.myretro"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "125029452203-opk783dqs7psgo8t9mdf53ggj5tj3a96.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.sikstree.myretro",
+            "certificate_hash": "0f344d80cd54853b7705555d61c9d733efb75f28"
+          }
+        },
+        {
+          "client_id": "125029452203-gulie33ua61hblncl1tljg2f60urlpss.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAALPAba7PSN4Sm53mvpxoVEB9xeOayvEQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "125029452203-gulie33ua61hblncl1tljg2f60urlpss.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
