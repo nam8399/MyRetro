@@ -6,18 +6,21 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.ViewModelProvider
 import com.sikstree.myretro.R
 import com.sikstree.myretro.View.Activity.CityPopActivity
 import com.sikstree.myretro.databinding.FragmentHomeBinding
+import com.sikstree.myretro.viewModel.CityPopViewModel
+import com.sikstree.myretro.viewModel.HomeViewModel
+import com.sikstree.myretro.viewModel.MainViewModel
 import kotlinx.coroutines.Job
 
 class HomeFragment() : Fragment() {
     lateinit var binding: FragmentHomeBinding
-    var isSeverAdd: Boolean = false
-    lateinit var job: Job
-    var bannerPosition: Int = 0
+    lateinit var viewModel : HomeViewModel
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -25,15 +28,19 @@ class HomeFragment() : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
+        viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
         binding.imgEx1.clipToOutline = true
         binding.imgEx2.clipToOutline = true
         binding.imgEx3.clipToOutline = true
 
+        viewModel.makeData()
+
         binding.citypopzone.setOnClickListener {
             val intent = Intent(context, CityPopActivity::class.java)
             startActivity(intent)
         }
+
 
         return binding.root
     }
