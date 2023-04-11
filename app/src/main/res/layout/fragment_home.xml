@@ -131,31 +131,31 @@
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
                 <ImageView
-                    android:id="@+id/img_ex1"
+                    android:id="@+id/img_1"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitCenter"
                     android:background="@drawable/round_img"
                     android:src="@drawable/img_ex3">
                 </ImageView>
                 <ImageView
-                    android:id="@+id/img_ex2"
+                    android:id="@+id/img_2"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitCenter"
                     android:background="@drawable/round_img"
                     android:src="@drawable/img_ex2"
                     android:layout_marginLeft="10dp">
                 </ImageView>
                 <ImageView
-                    android:id="@+id/img_ex3"
+                    android:id="@+id/img_3"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:src="@drawable/img_ex3"
-                    android:scaleType="centerCrop"
+                    android:scaleType="fitCenter"
                     android:background="@drawable/round_img"
                     android:layout_marginLeft="10dp">
                 </ImageView>

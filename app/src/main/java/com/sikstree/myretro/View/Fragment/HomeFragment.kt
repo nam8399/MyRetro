@@ -8,7 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.bumptech.glide.Glide
 import com.sikstree.myretro.R
 import com.sikstree.myretro.View.Activity.CityPopActivity
 import com.sikstree.myretro.databinding.FragmentHomeBinding
@@ -30,9 +32,9 @@ class HomeFragment() : Fragment() {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_home, container, false)
         viewModel = ViewModelProvider(this).get(HomeViewModel::class.java)
 
-        binding.imgEx1.clipToOutline = true
-        binding.imgEx2.clipToOutline = true
-        binding.imgEx3.clipToOutline = true
+        binding.img1.clipToOutline = true
+        binding.img2.clipToOutline = true
+        binding.img3.clipToOutline = true
 
         binding.viewModel = viewModel
         binding.lifecycleOwner = this
@@ -44,6 +46,23 @@ class HomeFragment() : Fragment() {
             startActivity(intent)
         }
 
+        viewModel.retro_item_url.observe(viewLifecycleOwner, Observer {
+            Glide.with(this)
+                .load(it)
+                .into(binding.img1)
+        })
+
+        viewModel.retro_item_url2.observe(viewLifecycleOwner, Observer {
+            Glide.with(this)
+                .load(it)
+                .into(binding.img2)
+        })
+
+        viewModel.retro_item_url3.observe(viewLifecycleOwner, Observer {
+            Glide.with(this)
+                .load(it)
+                .into(binding.img3)
+        })
 
         return binding.root
     }

@@ -18,11 +18,17 @@ class HomeViewModel( application: Application) : AndroidViewModel(application) {
     var retro_item_content = MutableLiveData<String>()
     var retro_item_content2 = MutableLiveData<String>()
     var retro_item_content3 = MutableLiveData<String>()
+    var retro_item_url = MutableLiveData<String>()
+    var retro_item_url2 = MutableLiveData<String>()
+    var retro_item_url3 = MutableLiveData<String>()
 
     init{
         retro_item_content.value = ""
         retro_item_content2.value = ""
         retro_item_content3.value = ""
+        retro_item_url.value = ""
+        retro_item_url2.value = ""
+        retro_item_url3.value = ""
     }
 
 
@@ -35,7 +41,9 @@ class HomeViewModel( application: Application) : AndroidViewModel(application) {
                 retro_item_content.value = snapshot.data!!["cnt_title"].toString()
                 retro_item_content2.value = snapshot.data!!["cnt2_title"].toString()
                 retro_item_content3.value = snapshot.data!!["cnt3_title"].toString()
-                Log.d(title, retro_item_content.value.toString())
+                retro_item_url.value = snapshot.data!!["cnt_img"].toString()
+                retro_item_url2.value = snapshot.data!!["cnt2_img"].toString()
+                retro_item_url3.value = snapshot.data!!["cnt3_img"].toString()
             }
         })
     }
