@@ -123,7 +123,7 @@
             <LinearLayout
                 android:id="@+id/retro_item"
                 android:layout_width="match_parent"
-                android:layout_height="140dp"
+                android:layout_height="130dp"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/retro_item_text"
@@ -161,11 +161,57 @@
                 </ImageView>
             </LinearLayout>
             <LinearLayout
+                android:id="@+id/retro_item_content"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/retro_item"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp">
+                <TextView
+                    android:id="@+id/retro_item_content_1"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:textSize="13sp"
+                    android:text="@{viewModel.retro_item_content}"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/rose"
+                    android:gravity="center"
+                    android:layout_weight="1">
+                </TextView>
+                <TextView
+                    android:id="@+id/retro_item_content_2"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@{viewModel.retro_item_content2}"
+                    android:textColor="@color/black"
+                    android:fontFamily="@font/rose"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp">
+                </TextView>
+                <TextView
+                    android:id="@+id/retro_item_content_3"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/rose"
+                    android:text="@{viewModel.retro_item_content3}"
+                    android:textColor="@color/black"
+                    android:textSize="13sp"
+                    android:gravity="center"
+                    android:layout_marginLeft="10dp">
+                </TextView>
+            </LinearLayout>
+
+            <LinearLayout
                 android:id="@+id/retro_etc_text"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
-                app:layout_constraintTop_toBottomOf="@+id/retro_item"
+                app:layout_constraintTop_toBottomOf="@+id/retro_item_content"
                 android:layout_marginLeft="20dp"
                 android:layout_marginRight="20dp">
                 <TextView

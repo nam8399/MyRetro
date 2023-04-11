@@ -34,6 +34,9 @@ class HomeFragment() : Fragment() {
         binding.imgEx2.clipToOutline = true
         binding.imgEx3.clipToOutline = true
 
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
+
         viewModel.makeData()
 
         binding.citypopzone.setOnClickListener {
