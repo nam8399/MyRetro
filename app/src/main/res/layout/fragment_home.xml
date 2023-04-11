@@ -99,7 +99,7 @@
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_weight="0.7"
-                    android:text="레트로 핫-템"
+                    android:text="추천 레트로 핫-템"
                     android:fontFamily="@font/rose"
                     android:textAppearance="@style/place_retro_text">
                 </TextView>
@@ -136,7 +136,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:scaleType="fitCenter"
-                    android:background="@drawable/round_img"
                     android:src="@drawable/img_ex3">
                 </ImageView>
                 <ImageView
@@ -145,7 +144,6 @@
                     android:layout_height="wrap_content"
                     android:layout_weight="1"
                     android:scaleType="fitCenter"
-                    android:background="@drawable/round_img"
                     android:src="@drawable/img_ex2"
                     android:layout_marginLeft="10dp">
                 </ImageView>
@@ -156,7 +154,6 @@
                     android:layout_weight="1"
                     android:src="@drawable/img_ex3"
                     android:scaleType="fitCenter"
-                    android:background="@drawable/round_img"
                     android:layout_marginLeft="10dp">
                 </ImageView>
             </LinearLayout>
