@@ -21,6 +21,9 @@ class HomeViewModel( application: Application) : AndroidViewModel(application) {
     var retro_item_url = MutableLiveData<String>()
     var retro_item_url2 = MutableLiveData<String>()
     var retro_item_url3 = MutableLiveData<String>()
+    var retro_item_img = MutableLiveData<String>()
+    var retro_item_img2 = MutableLiveData<String>()
+    var retro_item_img3 = MutableLiveData<String>()
 
     init{
         retro_item_content.value = ""
@@ -29,6 +32,9 @@ class HomeViewModel( application: Application) : AndroidViewModel(application) {
         retro_item_url.value = ""
         retro_item_url2.value = ""
         retro_item_url3.value = ""
+        retro_item_img.value = ""
+        retro_item_img2.value = ""
+        retro_item_img3.value = ""
     }
 
 
@@ -41,9 +47,12 @@ class HomeViewModel( application: Application) : AndroidViewModel(application) {
                 retro_item_content.value = snapshot.data!!["cnt_title"].toString()
                 retro_item_content2.value = snapshot.data!!["cnt2_title"].toString()
                 retro_item_content3.value = snapshot.data!!["cnt3_title"].toString()
-                retro_item_url.value = snapshot.data!!["cnt_img"].toString()
-                retro_item_url2.value = snapshot.data!!["cnt2_img"].toString()
-                retro_item_url3.value = snapshot.data!!["cnt3_img"].toString()
+                retro_item_img.value = snapshot.data!!["cnt_img"].toString()
+                retro_item_img2.value = snapshot.data!!["cnt2_img"].toString()
+                retro_item_img3.value = snapshot.data!!["cnt3_img"].toString()
+                retro_item_url.value = snapshot.data!!["cnt_url"].toString()
+                retro_item_url2.value = snapshot.data!!["cnt2_url"].toString()
+                retro_item_url3.value = snapshot.data!!["cnt3_url"].toString()
             }
         })
     }

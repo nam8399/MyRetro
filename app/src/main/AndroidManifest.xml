@@ -14,6 +14,10 @@
         android:usesCleartextTraffic="true"
         tools:targetApi="31" >
         <activity
+            android:name=".View.Activity.WebviewActivity"
+            android:theme="@style/Theme.TransparentStatusBar"
+            android:exported="true" />
+        <activity
             android:name=".View.Activity.CityPopActivity"
             android:theme="@style/Theme.TransparentStatusBar"
             android:exported="true" />

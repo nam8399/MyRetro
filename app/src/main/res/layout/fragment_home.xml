@@ -76,17 +76,44 @@
                     android:src="@drawable/icon_allbtn">
                 </ImageView>
             </LinearLayout>
-            <ImageView
+            <LinearLayout
                 android:id="@+id/retro_place"
                 android:layout_width="match_parent"
-                android:layout_height="198dp"
+                android:layout_height="220dp"
+                android:layout_marginLeft="15dp"
+                android:layout_marginRight="15dp"
+                android:padding="10dp"
+                android:elevation="3dp"
+                android:orientation="vertical"
                 app:layout_constraintTop_toBottomOf="@+id/retro_place_text"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                android:scaleType="fitCenter"
-                android:layout_marginTop="15dp"
-                android:src="@drawable/img_retro_place">
-            </ImageView>
+                tools:ignore="MissingConstraints">
+                <androidx.constraintlayout.widget.ConstraintLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent">
+                    <androidx.viewpager2.widget.ViewPager2
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintTop_toTopOf="parent"
+                        android:id="@+id/viewpager2"
+                        android:clipChildren="false"
+                        android:clipToPadding="false"
+                        android:orientation="horizontal"/>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:id="@+id/indicators"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal"
+                        android:gravity="center"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintEnd_toEndOf="parent"
+                        app:layout_constraintBottom_toBottomOf="parent"
+
+                        android:padding="15dp"/>
+                </androidx.constraintlayout.widget.ConstraintLayout>
+            </LinearLayout>
             <LinearLayout
                 android:id="@+id/retro_item_text"
                 android:layout_width="match_parent"
