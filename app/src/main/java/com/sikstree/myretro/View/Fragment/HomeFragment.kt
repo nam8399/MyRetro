@@ -60,6 +60,7 @@ class HomeFragment() : Fragment() {
     }
 
     private fun settingView() {
+        val intent = Intent(context, WebviewActivity::class.java)
         binding.citypopzone.setOnClickListener {
             val intent = Intent(context, CityPopActivity::class.java)
             startActivity(intent)
@@ -83,6 +84,27 @@ class HomeFragment() : Fragment() {
                 .into(binding.img3)
         })
 
+        viewModel.retro_item_click.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                viewModel.retro_item_click.value = false
+                intent.putExtra("url",viewModel.retro_item_url.value)
+                startActivity(intent)
+            }
+        })
+
+        viewModel.retro_item_click2.observe(viewLifecycleOwner, Observer {
+            if (it) {
+                intent.putExtra("url",viewModel.retro_item_url2.value)
+                startActivity(intent)
+            }
+        })
+
+        viewModel.retro_item_click3.observe(viewLifecycleOwner, Observer {
+            if(it) {
+                intent.putExtra("url",viewModel.retro_item_url3.value)
+                startActivity(intent)
+            }
+        })
 
         var list = ArrayList<Int>()
 
@@ -110,13 +132,12 @@ class HomeFragment() : Fragment() {
 
         adapter.setItemClickListener(object : ViewPager2Adater.OnItemClickListener{
             override fun onClick(v: View, position: Int) {
-                val intent = Intent(context, WebviewActivity::class.java)
                 if (position == 0) {
-                    intent.putExtra("url",viewModel.retro_item_url.value)
+                    intent.putExtra("url",viewModel.retro_place_url.value)
                 } else if(position == 1) {
-                    intent.putExtra("url", viewModel.retro_item_url2.value)
+                    intent.putExtra("url", viewModel.retro_place_url2.value)
                 } else if(position == 2) {
-                    intent.putExtra("url", viewModel.retro_item_url3.value)
+                    intent.putExtra("url", viewModel.retro_place_url3.value)
                 }
                 startActivity(intent)
             }
@@ -203,6 +224,8 @@ class HomeFragment() : Fragment() {
             }
         }
     }
+
+
 
 
     override fun onResume() {
