@@ -3,6 +3,7 @@ package com.sikstree.myretro.View.Fragment
 import android.content.Intent
 import android.graphics.Color
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -33,13 +34,21 @@ import com.sikstree.myretro.viewModel.HomeViewModel
 import com.sikstree.myretro.viewModel.MainViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.delay
+import kotlinx.coroutines.withContext
 
 class HomeFragment() : Fragment() {
+    private val title = "HomeFragment"
     lateinit var binding: FragmentHomeBinding
     lateinit var viewModel : HomeViewModel
     lateinit var job : Job
     var bannerPosition : Int = 0
 
+    companion object {
+        val indicators = arrayOfNulls<ImageView>(3)
+        var layoutParams = LinearLayout.LayoutParams(
+            ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT
+        )
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -60,7 +69,10 @@ class HomeFragment() : Fragment() {
     }
 
     private fun settingView() {
-        val intent = Intent(context, WebviewActivity::class.java)
+        val intent = Intent(context, WebviewActivity::class.java) // 클릭 시 웹뷰로 이동하기 위한 인텐트 생성
+        var list = ArrayList<String>() // 추천 장소 이미지 리스트
+
+
         binding.citypopzone.setOnClickListener {
             val intent = Intent(context, CityPopActivity::class.java)
             startActivity(intent)
@@ -94,6 +106,7 @@ class HomeFragment() : Fragment() {
 
         viewModel.retro_item_click2.observe(viewLifecycleOwner, Observer {
             if (it) {
+                viewModel.retro_item_click2.value = false
                 intent.putExtra("url",viewModel.retro_item_url2.value)
                 startActivity(intent)
             }
@@ -101,18 +114,87 @@ class HomeFragment() : Fragment() {
 
         viewModel.retro_item_click3.observe(viewLifecycleOwner, Observer {
             if(it) {
+                viewModel.retro_item_click3.value = false
                 intent.putExtra("url",viewModel.retro_item_url3.value)
                 startActivity(intent)
             }
         })
 
-        var list = ArrayList<Int>()
+        viewModel.position_move_fragment.observe(viewLifecycleOwner, Observer {
+            (activity as MainActivity).moveFragment(it)
+        })
 
-        list.add(Color.parseColor("#ffff00"))
-        list.add(Color.parseColor("#bdbdbd"))
-        list.add(Color.parseColor("#0f9231"))
-        var adapter = ViewPager2Adater(list,activity as MainActivity)
+        viewModel.retro_place_img.observe(viewLifecycleOwner, Observer {
+            list.add(0,it)
+            setViewPager(list, intent)
+        })
 
+        viewModel.retro_place_img2.observe(viewLifecycleOwner, Observer {
+            list.add(1,it)
+            setViewPager(list, intent)
+        })
+
+        viewModel.retro_place_img3.observe(viewLifecycleOwner, Observer {
+            list.add(2,it)
+            setViewPager(list, intent)
+        })
+
+        list.add("")
+        list.add("")
+        list.add("")
+
+        Log.d(title, list.size.toString())
+    }
+
+    private fun settingData() {
+        viewModel.makeData()
+    }
+
+    private fun setupOnBoardingIndicators(){ // 건축강의 뷰 인디게이터 구성셋팅
+        layoutParams.setMargins(8,0,8,0)
+        for (i in indicators.indices) {
+            binding.indicators.removeView(indicators[i])
+        }
+
+        for( i in indicators.indices){
+            indicators[i] = ImageView(activity as MainActivity)
+            indicators[i]?.setImageDrawable(
+                ContextCompat.getDrawable(
+                    activity as MainActivity,
+                    R.drawable.onboarding_indicator_inactive
+                ))
+
+            indicators[i]?.layoutParams = layoutParams
+            binding.indicators?.addView(indicators[i])
+        }
+    }
+
+    private fun setCurrentOnboardingIndicator( index : Int){ // 인디게이터 뷰 이미지 셋팅
+        var childCount = binding.indicators?.childCount
+        for(i in  0 until childCount!!){
+            var imageView = binding.indicators?.getChildAt(i) as ImageView
+            if(i==index){
+                imageView.setImageDrawable(ContextCompat.getDrawable(activity as MainActivity,
+                    R.drawable.onboarding_indicator_active))
+            }else{
+                imageView.setImageDrawable(ContextCompat.getDrawable(activity as MainActivity,
+                    R.drawable.onboarding_indicator_inactive))
+            }
+        }
+    }
+
+    fun scrollJobCreate() { // auto Scroll을 위한 함수
+        job = lifecycleScope.launchWhenResumed {
+            delay(2000)
+            binding.viewpager2.setCurrentItem(++bannerPosition, true)
+            if (bannerPosition == 2) {
+                bannerPosition = -1
+            }
+        }
+    }
+
+    fun setViewPager(list : ArrayList<String>, intent : Intent) {
+        val adapter = ViewPager2Adater(list,activity as MainActivity)
 //        binding.viewpager2.offscreenPageLimit=3
         binding.viewpager2.getChildAt(0).overScrollMode=View.OVER_SCROLL_NEVER
         binding.viewpager2.adapter = adapter
@@ -166,66 +248,6 @@ class HomeFragment() : Fragment() {
             }
         })
     }
-
-    private fun settingData() {
-        viewModel.makeData()
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-    }
-
-
-    private fun setupOnBoardingIndicators(){ // 건축강의 뷰 인디게이터 구성셋팅
-        val indicators =
-            arrayOfNulls<ImageView>(3)
-
-        var layoutParams = LinearLayout.LayoutParams(
-            ViewGroup.LayoutParams.WRAP_CONTENT,ViewGroup.LayoutParams.WRAP_CONTENT
-        )
-
-        layoutParams.setMargins(8,0,8,0)
-
-        for( i in indicators.indices){
-            indicators[i] = ImageView(activity as MainActivity)
-            indicators[i]?.setImageDrawable(
-                ContextCompat.getDrawable(
-                    activity as MainActivity,
-                    R.drawable.onboarding_indicator_inactive
-                ))
-
-            indicators[i]?.layoutParams = layoutParams
-
-            binding.indicators?.addView(indicators[i])
-        }
-    }
-
-    private fun setCurrentOnboardingIndicator( index : Int){ // 건축 강의 인디게이터 뷰 이미지 셋팅
-        var childCount = binding.indicators?.childCount
-        for(i in  0 until childCount!!){
-            var imageView = binding.indicators?.getChildAt(i) as ImageView
-            if(i==index){
-                imageView.setImageDrawable(ContextCompat.getDrawable(activity as MainActivity,
-                    R.drawable.onboarding_indicator_active))
-            }else{
-                imageView.setImageDrawable(ContextCompat.getDrawable(activity as MainActivity,
-                    R.drawable.onboarding_indicator_inactive))
-            }
-        }
-    }
-
-    fun scrollJobCreate() { // auto Scroll을 위한 함수
-        job = lifecycleScope.launchWhenResumed {
-            delay(2000)
-            binding.viewpager2.setCurrentItem(++bannerPosition, true)
-            if (bannerPosition == 2) {
-                bannerPosition = -1
-            }
-        }
-    }
-
-
 
 
     override fun onResume() {

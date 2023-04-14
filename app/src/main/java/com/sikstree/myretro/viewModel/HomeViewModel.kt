@@ -10,10 +10,14 @@ import com.google.firebase.firestore.EventListener
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
+import com.sikstree.myretro.View.Activity.MainActivity
 
 
 class HomeViewModel( application: Application) : AndroidViewModel(application) {
     private val title = "HomeViewModel"
+
+
+    var position_move_fragment = MutableLiveData<Int>()
 
     // 추천 핫-템 관련 변수
     var retro_item_content = MutableLiveData<String>()
@@ -42,6 +46,8 @@ class HomeViewModel( application: Application) : AndroidViewModel(application) {
 
 
     init{
+        position_move_fragment.value = 0
+
         retro_item_content.value = ""
         retro_item_content2.value = ""
         retro_item_content3.value = ""
@@ -65,7 +71,6 @@ class HomeViewModel( application: Application) : AndroidViewModel(application) {
         retro_item_url2.value = ""
         retro_item_url3.value = ""
     }
-
 
     fun makeData() {
         val database = Firebase.firestore
@@ -91,8 +96,16 @@ class HomeViewModel( application: Application) : AndroidViewModel(application) {
                 retro_place_url.value = snapshot.data!!["cnt_url"].toString()
                 retro_place_url2.value = snapshot.data!!["cnt2_url"].toString()
                 retro_place_url3.value = snapshot.data!!["cnt3_url"].toString()
+                retro_place_img.value = snapshot.data!!["cnt_img"].toString()
+                retro_place_img2.value = snapshot.data!!["cnt2_img"].toString()
+                retro_place_img3.value = snapshot.data!!["cnt3_img"].toString()
+
             }
         })
+    }
+
+    fun moveFragment(position : Int) {
+        position_move_fragment.value = position
     }
 
     fun clickRetroItem(itemindex : Int) {

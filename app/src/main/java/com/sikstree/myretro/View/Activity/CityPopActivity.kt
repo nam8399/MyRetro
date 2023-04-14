@@ -1,6 +1,7 @@
 package com.sikstree.myretro.View.Activity
 
 import android.app.Activity
+import android.content.Intent
 import android.graphics.Color
 import android.graphics.drawable.ColorDrawable
 import android.opengl.Visibility
@@ -43,6 +44,7 @@ class CityPopActivity : AppCompatActivity() {
         binding.lifecycleOwner = this
 
 
+        settingData()
         initview()
 
     }
@@ -65,6 +67,7 @@ class CityPopActivity : AppCompatActivity() {
     }
 
     private fun observeViewModel() {
+        val intent = Intent(this, WebviewActivity::class.java)
         viewModel.isMusicPlay.observe(this, Observer {
             if(it) {
                 binding.btnPlaymusic.visibility = View.GONE
@@ -74,7 +77,40 @@ class CityPopActivity : AppCompatActivity() {
                 binding.btnPausemusic.visibility = View.GONE
             }
         })
+
+        viewModel.citypop_item_img.observe(this, Observer {
+            Glide.with(this)
+                .load(it)
+                .into(binding.imgWindowFirst)
+        })
+
+        viewModel.citypop_item_img2.observe(this, Observer {
+            Glide.with(this)
+                .load(it)
+                .into(binding.imgWindowSecond)
+        })
+
+        viewModel.citypop_item_click.observe(this, Observer {
+            if (it) {
+                viewModel.citypop_item_click.value = false
+                intent.putExtra("url",viewModel.citypop_item_url.value)
+                startActivity(intent)
+            }
+        })
+
+        viewModel.citypop_item_click2.observe(this, Observer {
+            if (it) {
+                viewModel.citypop_item_click2.value = false
+                intent.putExtra("url",viewModel.citypop_item_url2.value)
+                startActivity(intent)
+            }
+        })
     }
+
+    private fun settingData() {
+        viewModel.makeData()
+    }
+
 
 
     override fun onStop() {

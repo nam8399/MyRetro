@@ -12,8 +12,10 @@ import com.sikstree.myretro.View.Fragment.*
 import com.sikstree.myretro.databinding.ActivityMainBinding
 import com.sikstree.myretro.viewModel.MainViewModel
 import com.sikstree.myretro.viewModel.MainViewModel.Companion.TAG_HOME
+import com.sikstree.myretro.viewModel.MainViewModel.Companion.TAG_MYPROFILE
 import com.sikstree.myretro.viewModel.MainViewModel.Companion.TAG_PLACE
 import com.sikstree.myretro.viewModel.MainViewModel.Companion.TAG_RETROSHOP
+import com.sikstree.myretro.viewModel.MainViewModel.Companion.TAG_USERRETRO
 
 
 class MainActivity : AppCompatActivity() {
@@ -43,12 +45,22 @@ class MainActivity : AppCompatActivity() {
                 R.id.homeFragment -> viewModel.setFragment(TAG_HOME, HomeFragment(), fragmentManager)
                 R.id.retroshopFragment -> viewModel.setFragment(TAG_RETROSHOP, RetroShopFragment(), fragmentManager)
                 R.id.placeFragment-> viewModel.setFragment(TAG_PLACE, PlaceFragment(), fragmentManager)
-                R.id.userretroFragment-> viewModel.setFragment(TAG_PLACE, UserRetroFragment(), fragmentManager)
-                R.id.myprofileFragment-> viewModel.setFragment(TAG_PLACE, MyProfileFragment(), fragmentManager)
+                R.id.userretroFragment-> viewModel.setFragment(TAG_USERRETRO, UserRetroFragment(), fragmentManager)
+                R.id.myprofileFragment-> viewModel.setFragment(TAG_MYPROFILE, MyProfileFragment(), fragmentManager)
             }
             true
         }
 
+    }
+
+    fun moveFragment(position : Int) {
+        when(position) {
+            1 -> binding.navigationView.selectedItemId = R.id.homeFragment
+            2 -> binding.navigationView.selectedItemId = R.id.retroshopFragment
+            3 -> binding.navigationView.selectedItemId = R.id.placeFragment
+            4 -> binding.navigationView.selectedItemId = R.id.userretroFragment
+            5 -> binding.navigationView.selectedItemId = R.id.myprofileFragment
+        }
     }
 
 
