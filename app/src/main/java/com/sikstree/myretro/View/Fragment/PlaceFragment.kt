@@ -5,29 +5,18 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.databinding.DataBindingUtil
+import androidx.viewpager2.widget.ViewPager2
+import com.google.android.material.tabs.TabLayout
 import com.sikstree.myretro.R
+import com.sikstree.myretro.View.Activity.MainActivity
+import com.sikstree.myretro.databinding.FragmentPlaceBinding
 
-// TODO: Rename parameter arguments, choose names that match
-// the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-private const val ARG_PARAM1 = "param1"
-private const val ARG_PARAM2 = "param2"
-
-/**
- * A simple [Fragment] subclass.
- * Use the [PlaceFragment.newInstance] factory method to
- * create an instance of this fragment.
- */
 class PlaceFragment : Fragment() {
-    // TODO: Rename and change types of parameters
-    private var param1: String? = null
-    private var param2: String? = null
+    private lateinit var binding : FragmentPlaceBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        arguments?.let {
-            param1 = it.getString(ARG_PARAM1)
-            param2 = it.getString(ARG_PARAM2)
-        }
     }
 
     override fun onCreateView(
@@ -35,26 +24,31 @@ class PlaceFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_place, container, false)
+        binding = DataBindingUtil.inflate(inflater, R.layout.fragment_place, container, false)
+
+        initview()
+
+        return binding.root
     }
 
-    companion object {
-        /**
-         * Use this factory method to create a new instance of
-         * this fragment using the provided parameters.
-         *
-         * @param param1 Parameter 1.
-         * @param param2 Parameter 2.
-         * @return A new instance of fragment PlaceFragment.
-         */
-        // TODO: Rename and change types and number of parameters
-        @JvmStatic
-        fun newInstance(param1: String, param2: String) =
-            PlaceFragment().apply {
-                arguments = Bundle().apply {
-                    putString(ARG_PARAM1, param1)
-                    putString(ARG_PARAM2, param2)
-                }
-            }
+    private fun initview() {
+        val viewPager: ViewPager2 = binding.viewPager
+        val tabLayout: TabLayout = binding.tabLayout
+//
+//        val viewpagerFragmentAdapter = activity.ViewpagerFragmentAdapter(this)
+//
+//        // ViewPager2의 adapter 설정
+//        viewPager.adapter = viewpagerFragmentAdapter
+//
+//
+//        // ###### TabLayout과 ViewPager2를 연결
+//        // 1. 탭메뉴의 이름을 리스트로 생성해둔다.
+//        val tabTitles = listOf<String>("첫번째", "두번째", "세번째")
+//
+//        // 2. TabLayout과 ViewPager2를 연결하고, TabItem의 메뉴명을 설정한다.
+//        TabLayoutMediator(tabLayout, viewPager, {tab, position -> tab.text = tabTitles[position]}).attach()
+        // FragmentStateAdapter 생성
+
     }
+
 }
