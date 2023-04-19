@@ -6,14 +6,19 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.viewpager.widget.ViewPager
 import androidx.viewpager2.widget.ViewPager2
 import com.google.android.material.tabs.TabLayout
+import com.sikstree.myretro.Adapter.DetailPagerAdapter
 import com.sikstree.myretro.R
 import com.sikstree.myretro.View.Activity.MainActivity
 import com.sikstree.myretro.databinding.FragmentPlaceBinding
 
 class PlaceFragment : Fragment() {
     private lateinit var binding : FragmentPlaceBinding
+    lateinit var viewPagers: ViewPager
+    lateinit var tabLayouts: TabLayout
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,29 +31,41 @@ class PlaceFragment : Fragment() {
         // Inflate the layout for this fragment
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_place, container, false)
 
-        initview()
+        setUpViewPager()
 
         return binding.root
     }
 
-    private fun initview() {
-        val viewPager: ViewPager2 = binding.viewPager
-        val tabLayout: TabLayout = binding.tabLayout
-//
-//        val viewpagerFragmentAdapter = activity.ViewpagerFragmentAdapter(this)
-//
-//        // ViewPager2의 adapter 설정
-//        viewPager.adapter = viewpagerFragmentAdapter
-//
-//
-//        // ###### TabLayout과 ViewPager2를 연결
-//        // 1. 탭메뉴의 이름을 리스트로 생성해둔다.
-//        val tabTitles = listOf<String>("첫번째", "두번째", "세번째")
-//
-//        // 2. TabLayout과 ViewPager2를 연결하고, TabItem의 메뉴명을 설정한다.
-//        TabLayoutMediator(tabLayout, viewPager, {tab, position -> tab.text = tabTitles[position]}).attach()
-        // FragmentStateAdapter 생성
+    override fun onActivityCreated(savedInstanceState: Bundle?) {
+        super.onActivityCreated(savedInstanceState)
 
+        setUpViewPager()
+        tabLayouts.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {
+            override fun onTabReselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabUnselected(tab: TabLayout.Tab?) {
+            }
+
+            override fun onTabSelected(tab: TabLayout.Tab?) {
+            }
+        })
+    }
+
+
+    private fun setUpViewPager() {
+        viewPagers = binding.viewPager
+        tabLayouts = binding.tabLayout
+
+        var adapter = DetailPagerAdapter(requireFragmentManager())
+        adapter.addFragment(UserRetroFragment(), "인기 장소")
+        adapter.addFragment(UserRetroFragment(), "최신 추천 장소")
+
+        viewPagers!!.adapter = adapter
+        tabLayouts!!.setupWithViewPager(viewPagers)
+    }
+
+    companion object {
     }
 
 }
