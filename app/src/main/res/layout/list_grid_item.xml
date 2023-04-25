@@ -5,14 +5,14 @@
     android:id="@+id/layoutListItem"
     android:orientation="vertical"
     android:layout_marginHorizontal="20dp"
-    android:layout_gravity="center">
+    android:layout_gravity="center"
+    android:layout_marginBottom="20dp">
 
     <ImageView
         android:id="@+id/item_img"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/ic_launcher_foreground"
-        android:background="@drawable/ic_launcher_background"/>
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:src="@drawable/ic_launcher_foreground"/>
 
     <TextView
         android:id="@+id/item_title"

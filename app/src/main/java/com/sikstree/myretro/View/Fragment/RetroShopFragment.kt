@@ -26,19 +26,28 @@ class RetroShopFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_retro_shop, container, false)
 
-        datas.apply {
-
-        }
-
-        var list = arrayListOf("Title 1", "Title 2", "Title 3", "Title 4", "Title 5", "Title 6", "Title 7", "Title 8")
         var listManager = GridLayoutManager(context, 3)
-        var listAdapter = ListAdapterGrid(list)
+        var listAdapter = ListAdapterGrid()
 
-        var recyclerList = binding.recyclerGridView.apply {
-            setHasFixedSize(true)
-            layoutManager = listManager
-            adapter = listAdapter
+        datas.apply {
+            add(ItemData(img = R.drawable.img_ex1, title = "mary", url = 24))
+            add(ItemData(img = R.drawable.img_ex1, title = "jenny", url = 26))
+            add(ItemData(img = R.drawable.img_ex1, title = "jhon", url = 27))
+            add(ItemData(img = R.drawable.img_ex1, title = "ruby", url = 21))
+            add(ItemData(img = R.drawable.img_ex1, title = "yuna", url = 23))
+
+            listAdapter.datas = datas
+            listAdapter.notifyDataSetChanged()
+
+
+            var recyclerList = binding.recyclerGridView.apply {
+                setHasFixedSize(true)
+                layoutManager = listManager
+                adapter = listAdapter
+            }
+
         }
+
 
 
         return binding.root

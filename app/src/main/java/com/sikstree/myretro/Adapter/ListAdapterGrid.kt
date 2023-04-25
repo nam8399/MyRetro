@@ -11,7 +11,7 @@ import com.bumptech.glide.Glide
 import com.sikstree.myretro.Data.ItemData
 import com.sikstree.myretro.R
 
-class ListAdapterGrid(var list: ArrayList<String>): RecyclerView.Adapter<ListAdapterGrid.ViewHolder>() {
+class ListAdapterGrid(): RecyclerView.Adapter<ListAdapterGrid.ViewHolder>() {
 
     var datas = mutableListOf<ItemData>()
 
@@ -24,8 +24,11 @@ class ListAdapterGrid(var list: ArrayList<String>): RecyclerView.Adapter<ListAda
         fun bind(item: ItemData) {
             itemTitle.text = item.title
 //            itemUrl = item.age.toString()
-            Glide.with(itemView).load(item.img).into(itemImg)
-
+            Glide
+                .with(itemView)
+                .load(item.img)
+                .centerCrop()
+                .into(itemImg)
         }
     }
 
@@ -46,7 +49,7 @@ class ListAdapterGrid(var list: ArrayList<String>): RecyclerView.Adapter<ListAda
     }
 
     override fun getItemCount(): Int {
-        return list.size
+        return datas.size
     }
 
 }
