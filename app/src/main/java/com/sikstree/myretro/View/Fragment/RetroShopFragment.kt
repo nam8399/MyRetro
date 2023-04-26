@@ -6,15 +6,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.databinding.DataBindingUtil
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.sikstree.myretro.Adapter.ListAdapterGrid
 import com.sikstree.myretro.Data.ItemData
 import com.sikstree.myretro.R
 import com.sikstree.myretro.databinding.FragmentRetroShopBinding
+import com.sikstree.myretro.viewModel.RetroshopViewModel
 
 class RetroShopFragment : Fragment() {
     lateinit var binding : FragmentRetroShopBinding
     val datas = mutableListOf<ItemData>()
+    lateinit var viewModel : RetroshopViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -26,31 +28,33 @@ class RetroShopFragment : Fragment() {
     ): View? {
         binding = DataBindingUtil.inflate(inflater, R.layout.fragment_retro_shop, container, false)
 
-        var listManager = GridLayoutManager(context, 3)
-        var listAdapter = ListAdapterGrid()
 
-        datas.apply {
-            add(ItemData(img = R.drawable.img_ex1, title = "mary", url = 24))
-            add(ItemData(img = R.drawable.img_ex1, title = "jenny", url = 26))
-            add(ItemData(img = R.drawable.img_ex1, title = "jhon", url = 27))
-            add(ItemData(img = R.drawable.img_ex1, title = "ruby", url = 21))
-            add(ItemData(img = R.drawable.img_ex1, title = "yuna", url = 23))
-
-            listAdapter.datas = datas
-            listAdapter.notifyDataSetChanged()
+        viewModel = ViewModelProvider(this).get(RetroshopViewModel::class.java)
 
 
-            var recyclerList = binding.recyclerGridView.apply {
-                setHasFixedSize(true)
-                layoutManager = listManager
-                adapter = listAdapter
-            }
+        binding.viewModel = viewModel
+        binding.lifecycleOwner = this
 
-        }
+
+        initview()
+
 
 
 
         return binding.root
+    }
+
+    private fun initview() {
+        var listManager = GridLayoutManager(context, 3)
+        var listAdapter = viewModel.ListAdapterGrid()
+
+
+        var recyclerList = binding.recyclerGridView.apply {
+            setHasFixedSize(true)
+            layoutManager = listManager
+            adapter = listAdapter
+        }
+
     }
 
 }
