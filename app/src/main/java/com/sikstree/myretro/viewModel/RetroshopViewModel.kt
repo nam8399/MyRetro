@@ -30,6 +30,12 @@ class RetroshopViewModel(application: Application) : AndroidViewModel(applicatio
     private var uid : String? = null
     private var firestore : FirebaseFirestore? = null
 
+    var itemOnclickEvent = MutableLiveData<String>()
+
+    init {
+        itemOnclickEvent.value = ""
+    }
+
 
 
     inner class ListAdapterGrid(): RecyclerView.Adapter<ListAdapterGrid.ViewHolder>() {
@@ -50,8 +56,6 @@ class RetroshopViewModel(application: Application) : AndroidViewModel(applicatio
                     for (snapshot in querySnapshot!!.documents) {
                         var item = snapshot.toObject(ItemData::class.java)
                         datas.add(item!!)
-
-                        Log.d(title, "남준식 테스트" + item.title)
                     }
                     notifyDataSetChanged()
                 }
@@ -72,6 +76,13 @@ class RetroshopViewModel(application: Application) : AndroidViewModel(applicatio
                     .load(item.img)
                     .centerCrop()
                     .into(itemImg)
+
+
+                itemImg.setOnClickListener { // 아이템 클릭 시 LiveData 값을 변경하여 Fragment에서 Observe 하다가 변경 시 웹뷰 띄우도록 설정
+                    Log.d(title, "Item Onclick! " + item.url)
+                    itemOnclickEvent.value = item.url
+                }
+
             }
         }
 
