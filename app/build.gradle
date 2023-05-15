@@ -40,7 +40,7 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-    kotlinOptions {
+    kotlinOptions {7
         jvmTarget = '1.8'
     }
 }
@@ -68,4 +68,7 @@ dependencies {
 
     implementation platform('com.google.firebase:firebase-bom:31.3.0')
     implementation 'com.google.firebase:firebase-analytics-ktx'
+
+
+    implementation 'io.github.bootpay:android:4.2.0'
 }
